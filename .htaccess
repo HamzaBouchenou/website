@@ -1,0 +1,35 @@
+# Set default charset
+AddDefaultCharset "utf-8"
+
+# 🔒 Prevent directory listing
+Options -Indexes
+
+# 🔒 Deny access to hidden files like .env, .htaccess, etc.
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# ✅ Enable URL rewriting
+RewriteEngine On
+
+# Set the base to your project folder
+RewriteBase /website/
+
+# 🚫 Skip rewriting if file or directory exists
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ✅ Pretty URLs without .php extensions
+RewriteRule ^([^/\.]+)$ $1.php [L,QSA]
+
+# ✅ Custom rewrites
+# /profil/hamza → profile.php?id=hamza
+RewriteRule ^profil/([a-zA-Z0-9_-]+)$ profile.php?id=$1 [L,QSA]
+
+# /categorie → Forum/categorie.php
+RewriteRule ^categorie$ forum/categorie.php [L,QSA]
+
+# /categorie/5 → Forum/sujet.php?id=5
+RewriteRule ^categorie/([0-9]+)$ forum/sujet.php?id=$1 [L,QSA]
