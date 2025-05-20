@@ -28,8 +28,11 @@ RewriteRule ^([^/\.]+)$ $1.php [L,QSA]
 # /profil/hamza → profile.php?id=hamza
 RewriteRule ^profil/([a-zA-Z0-9_-]+)$ profile.php?id=$1 [L,QSA]
 
-# /categorie → Forum/categorie.php
-RewriteRule ^categorie$ forum/categorie.php [L,QSA]
+# /categorie → categorie.php
+RewriteRule ^categorie$ categorie.php [L,QSA]
 
-# /categorie/5 → Forum/sujet.php?id=5
-RewriteRule ^categorie/([0-9]+)$ forum/sujet.php?id=$1 [L,QSA]
+# /categorie/5 → sujet.php?id=5
+RewriteRule ^categorie/([0-9]+)$ sujet.php?id=$1 [L,QSA]
+
+# /categorie/5/10 → sujet.php?id=5&sujet=10
+RewriteRule ^categorie/([0-9]+)/([0-9]+)$ sujet.php?id=$1&sujet=$2 [L,QSA]
